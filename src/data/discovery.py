@@ -15,8 +15,19 @@ from typing import Any, Iterable
 
 import numpy as np
 
-SUPPORTED_SUFFIXES = (".nii.gz", ".nii", ".mha", ".mhd", ".nrrd", ".npy", ".npz")
+SUPPORTED_SUFFIXES = (".nii.gz", ".nii", ".mha", ".mhd", ".nrrd", ".npy", ".npz", ".h5", ".hdf5")
 LABEL_TOKENS = {"label", "labels", "mask", "masks", "seg", "segs", "segmentation", "gt", "truth", "annotation", "annotations"}
+# These values come from the user-verified UA-MT example.  They are comparison
+# criteria only: every file is still opened and its own keys are inspected.
+UA_MT_REFERENCE = {
+    "filename": "mri_norm2.h5",
+    "keys": ["image", "label"],
+    "image_shape": [177, 138, 88],
+    "image_dtype": "float32",
+    "label_shape": [177, 138, 88],
+    "label_dtype": "uint8",
+    "label_values": [0, 1],
+}
 
 
 @dataclass(frozen=True)
@@ -37,7 +48,7 @@ def _suffix(path: Path) -> str:
 
 
 def _is_supported(path: Path) -> bool:
-    return path.is_file() and _suffix(path) in SUPPORTED_SUFFIXES
+    return _suffix(path) in SUPPORTED_SUFFIXES
 
 
 def _tokens(path: Path) -> set[str]:
@@ -101,6 +112,134 @@ def _label_values(array: np.ndarray, max_unique_values: int = 256) -> list[float
     return [value.item() for value in values]
 
 
+def _h5_dataset_stats(dataset: Any, max_unique_values: int = 256) -> dict[str, Any]:
+    """Collect factual HDF5 dataset properties; no image/label names are assumed."""
+    if dataset.dtype.kind not in "biufc":
+        return {"shape": list(dataset.shape), "dtype": str(dataset.dtype), "numeric": False}
+    array = dataset[()]
+    stats: dict[str, Any] = {
+        "shape": list(dataset.shape),
+        "dtype": str(dataset.dtype),
+        "numeric": True,
+        "min": np.nanmin(array).item(),
+        "max": np.nanmax(array).item(),
+    }
+    # Unique values are particularly useful for a prospective segmentation mask.
+    values = np.unique(array)
+    if len(values) <= max_unique_values:
+        stats["unique_values"] = [value.item() for value in values]
+    else:
+        stats["unique_values"] = None
+        stats["unique_value_count"] = int(len(values))
+    return stats
+
+
+def _infer_h5_roles(datasets: dict[str, dict[str, Any]]) -> tuple[str | None, str | None, list[str]]:
+    """Propose roles from inspected names and contents, recording the evidence.
+
+    This is intentionally a proposal rather than a hard-coded UA-MT key mapping.
+    """
+    notes: list[str] = []
+    numeric = {name: info for name, info in datasets.items() if info.get("numeric")}
+    image_named = [name for name in numeric if name.lower().split("/")[-1] in {"image", "images", "mri"}]
+    label_named = [name for name in numeric if name.lower().split("/")[-1] in {"label", "labels", "mask", "masks", "seg", "segmentation"}]
+    image_key = image_named[0] if len(image_named) == 1 else None
+    label_key = label_named[0] if len(label_named) == 1 else None
+    if image_key:
+        notes.append(f"image key proposed from dataset name: {image_key}")
+    if label_key:
+        notes.append(f"label key proposed from dataset name: {label_key}")
+    # If a name alone is not decisive, numeric type and cardinality are evidence,
+    # but ambiguity remains visible instead of being silently resolved.
+    if label_key is None:
+        categorical = [name for name, info in numeric.items() if info.get("unique_values") is not None and len(info["unique_values"]) <= 32]
+        if len(categorical) == 1:
+            label_key = categorical[0]
+            notes.append(f"label key proposed from low unique-value count: {label_key}")
+    if image_key is None:
+        remaining = [name for name in numeric if name != label_key]
+        if len(remaining) == 1:
+            image_key = remaining[0]
+            notes.append(f"image key proposed as the remaining numeric dataset: {image_key}")
+    if image_key is None or label_key is None:
+        notes.append("image/label role is ambiguous; inspect the dataset record before using it.")
+    return image_key, label_key, notes
+
+
+def inspect_h5_case(path: Path) -> dict[str, Any]:
+    """Inspect every dataset/group in one HDF5 case without modifying it."""
+    try:
+        import h5py
+
+        datasets: dict[str, dict[str, Any]] = {}
+        groups: list[str] = []
+        metadata: dict[str, Any] = {}
+        with h5py.File(path, "r") as handle:
+            def visitor(name: str, obj: Any) -> None:
+                if isinstance(obj, h5py.Group):
+                    groups.append(name)
+                elif isinstance(obj, h5py.Dataset):
+                    datasets[name] = _h5_dataset_stats(obj)
+                if getattr(obj, "attrs", None):
+                    metadata[name or "/"] = {key: _json_value(value) for key, value in obj.attrs.items()}
+
+            visitor("", handle)
+            handle.visititems(visitor)
+        image_key, label_key, role_notes = _infer_h5_roles(datasets)
+        image_shape = datasets.get(image_key, {}).get("shape") if image_key else None
+        label_shape = datasets.get(label_key, {}).get("shape") if label_key else None
+        reference_deviations = _ua_mt_reference_deviations(path, datasets)
+        return {
+            "path": str(path.resolve()),
+            "case_id": path.parent.name,
+            "readable": True,
+            "groups": groups,
+            "keys": sorted(datasets),
+            "datasets": datasets,
+            "metadata": metadata,
+            "proposed_image_key": image_key,
+            "proposed_label_key": label_key,
+            "role_inference": role_notes,
+            "image_label_spatial_match": image_shape == label_shape if image_shape and label_shape else None,
+            "matches_verified_ua_mt_example": not reference_deviations,
+            "verified_example_deviations": reference_deviations,
+            "error": None,
+        }
+    except Exception as exc:
+        return {"path": str(path.resolve()), "case_id": path.parent.name, "readable": False, "groups": [], "keys": [], "datasets": {}, "metadata": {}, "proposed_image_key": None, "proposed_label_key": None, "role_inference": [], "image_label_spatial_match": None, "matches_verified_ua_mt_example": False, "verified_example_deviations": ["file could not be inspected"], "error": f"{type(exc).__name__}: {exc}"}
+
+
+def _ua_mt_reference_deviations(path: Path, datasets: dict[str, dict[str, Any]]) -> list[str]:
+    """Compare inspected data with the supplied example; never use it to read keys."""
+    deviations: list[str] = []
+    if path.name != UA_MT_REFERENCE["filename"]:
+        deviations.append(f"unexpected HDF5 filename: {path.name}")
+    if sorted(datasets) != UA_MT_REFERENCE["keys"]:
+        deviations.append(f"dataset keys are {sorted(datasets)}, expected {UA_MT_REFERENCE['keys']}")
+    for role in ("image", "label"):
+        actual = datasets.get(role)
+        if actual is None:
+            continue
+        for property_name in ("shape", "dtype"):
+            expected = UA_MT_REFERENCE[f"{role}_{property_name}"]
+            if actual.get(property_name) != expected:
+                deviations.append(f"{role} {property_name} is {actual.get(property_name)}, expected {expected}")
+    actual_values = datasets.get("label", {}).get("unique_values")
+    if actual_values is not None and actual_values != UA_MT_REFERENCE["label_values"]:
+        deviations.append(f"label unique values are {actual_values}, expected {UA_MT_REFERENCE['label_values']}")
+    return deviations
+
+
+def _json_value(value: Any) -> Any:
+    if isinstance(value, np.ndarray):
+        return value.tolist()
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, bytes):
+        return value.decode("utf-8", errors="replace")
+    return value
+
+
 def discover_dataset(data_root: str | Path) -> dict[str, Any]:
     """Return a JSON-serialisable report and proposed, explicitly flagged pairs."""
     root = Path(data_root).expanduser().resolve()
@@ -108,8 +247,11 @@ def discover_dataset(data_root: str | Path) -> dict[str, Any]:
         raise FileNotFoundError(f"Dataset directory does not exist: {root}")
 
     candidates = sorted((path for path in root.rglob("*") if _is_supported(path)), key=lambda p: str(p).lower())
-    label_paths = [path for path in candidates if is_probable_label(path)]
-    image_paths = [path for path in candidates if path not in label_paths]
+    h5_paths = [path for path in candidates if _suffix(path) in {".h5", ".hdf5"}]
+    h5_cases = [inspect_h5_case(path) for path in h5_paths]
+    non_h5_candidates = [path for path in candidates if path not in h5_paths]
+    label_paths = [path for path in non_h5_candidates if is_probable_label(path)]
+    image_paths = [path for path in non_h5_candidates if path not in label_paths]
     labels_by_key: dict[str, list[Path]] = {}
     for path in label_paths:
         labels_by_key.setdefault(case_key(path), []).append(path)
@@ -131,11 +273,25 @@ def discover_dataset(data_root: str | Path) -> dict[str, Any]:
 
     records = []
     for path in candidates:
+        if path in h5_paths:
+            continue
         record = inspect_volume(path, include_label_values=path in label_paths)
         record_dict = asdict(record)
         record_dict["relative_path"] = str(path.relative_to(root))
         record_dict["kind"] = "probable_label" if path in label_paths else "probable_image"
         records.append(record_dict)
+
+    valid_h5 = [case for case in h5_cases if case["readable"]]
+    h5_signatures = Counter(json.dumps({"keys": case["keys"], "datasets": {key: {"shape": value.get("shape"), "dtype": value.get("dtype")} for key, value in case["datasets"].items()}}, sort_keys=True) for case in valid_h5)
+    h5_inconsistencies = []
+    if len(h5_signatures) > 1:
+        h5_inconsistencies.append("Readable HDF5 cases do not all share the same dataset-key/shape/dtype structure.")
+    h5_inconsistencies.extend([f"{case['case_id']}: image and label shapes do not match" for case in valid_h5 if case["image_label_spatial_match"] is False])
+    h5_inconsistencies.extend([f"{case['case_id']}: {deviation}" for case in valid_h5 for deviation in case["verified_example_deviations"]])
+    image_shapes = sorted({tuple(case["datasets"].get("image", {}).get("shape", [])) for case in valid_h5})
+    label_shapes = sorted({tuple(case["datasets"].get("label", {}).get("shape", [])) for case in valid_h5})
+    image_dtypes = sorted({case["datasets"].get("image", {}).get("dtype") for case in valid_h5})
+    label_dtypes = sorted({case["datasets"].get("label", {}).get("dtype") for case in valid_h5})
 
     return {
         "schema_version": 1,
@@ -144,6 +300,23 @@ def discover_dataset(data_root: str | Path) -> dict[str, Any]:
         "assumptions": [],
         "file_count": len(candidates),
         "formats": dict(sorted(Counter(_suffix(path) for path in candidates).items())),
+        "h5_summary": {
+            "case_count": len(h5_cases),
+            "valid_h5_files": len(valid_h5),
+            "invalid_or_unreadable_h5_files": len(h5_cases) - len(valid_h5),
+            "cases_with_image_and_label": sum("image" in case["datasets"] and "label" in case["datasets"] for case in valid_h5),
+            "cases_with_matching_image_label_shape": sum(case["image_label_spatial_match"] is True for case in valid_h5),
+            "all_cases_same_internal_structure": len(h5_signatures) <= 1,
+            "structure_signature_count": len(h5_signatures),
+            "image_shapes_seen": [list(shape) for shape in image_shapes],
+            "label_shapes_seen": [list(shape) for shape in label_shapes],
+            "image_dtypes_seen": image_dtypes,
+            "label_dtypes_seen": label_dtypes,
+            "cases_matching_verified_ua_mt_example": sum(case["matches_verified_ua_mt_example"] for case in valid_h5),
+            "reference": UA_MT_REFERENCE,
+            "inconsistencies": h5_inconsistencies,
+        },
+        "h5_cases": h5_cases,
         "records": records,
         "proposed_pairs": proposed_pairs,
         "unmatched_images": unmatched_images,
