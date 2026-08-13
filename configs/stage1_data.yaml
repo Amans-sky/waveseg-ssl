@@ -1,0 +1,11 @@
+# Stage 1 is deliberately inspection-only. Set data_root in Colab, do not add
+# preprocessing or split parameters until reviewing the generated manifest.
+stage: 1
+mode: inspect_only
+data_root: null
+manifest_path: data/manifests/dataset_manifest.json
+preview_path: data/manifests/representative_slices.png
+preprocessing: null
+target_spacing: null
+normalization: null
+split: null
