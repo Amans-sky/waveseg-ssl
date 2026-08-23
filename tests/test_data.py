@@ -5,6 +5,8 @@ import pytest
 
 from src.data.discovery import _is_supported, discover_dataset, write_manifest
 from src.data.transforms import PreprocessingNotApprovedError, build_preprocessing_transforms
+from src.data.datasets import UAMTH5Dataset
+from src.data.splits import create_case_split
 
 
 def test_discovery_proposes_a_filename_matched_pair(tmp_path: Path) -> None:
@@ -71,3 +73,16 @@ def test_verified_ua_mt_example_is_reported_as_consistent(tmp_path: Path) -> Non
     report = discover_dataset(tmp_path)
     assert report["h5_summary"]["cases_matching_verified_ua_mt_example"] == 1
     assert report["h5_cases"][0]["verified_example_deviations"] == []
+
+
+def test_stage2_split_and_lazy_h5_loader(tmp_path: Path) -> None:
+    h5py = pytest.importorskip("h5py")
+    for index in range(10):
+        case = tmp_path / f"case_{index:02d}"; case.mkdir()
+        with h5py.File(case / "mri_norm2.h5", "w") as handle:
+            handle.create_dataset("image", data=np.zeros((5, 6, 7), dtype=np.float32))
+            handle.create_dataset("label", data=np.zeros((5, 6, 7), dtype=np.uint8))
+    split = create_case_split(tmp_path, tmp_path / "split.json", seed=7)
+    assert [len(split["splits"][name]) for name in ("train", "val", "test")] == [7, 1, 2]
+    item = UAMTH5Dataset(split["splits"]["train"], patch_size=(8, 8, 8))[0]
+    assert item["image"].shape == item["label"].shape == (1, 8, 8, 8)
