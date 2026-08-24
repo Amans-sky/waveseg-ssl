@@ -1,0 +1,418 @@
+{
+  "format_version": 1,
+  "data_root": "/content/UA-MT/data/2018LA_Seg_Training Set",
+  "seed": 42,
+  "fractions": {
+    "train": 0.7,
+    "val": 0.15,
+    "test": 0.15
+  },
+  "splits": {
+    "train": [
+      {
+        "case_id": "CMPXO4J23G58J53Q98SZ",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CMPXO4J23G58J53Q98SZ/mri_norm2.h5"
+      },
+      {
+        "case_id": "CLXFYOBQDCVXQ9P7YC07",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CLXFYOBQDCVXQ9P7YC07/mri_norm2.h5"
+      },
+      {
+        "case_id": "WSJB9P4JCXUVHBOYFVWL",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/WSJB9P4JCXUVHBOYFVWL/mri_norm2.h5"
+      },
+      {
+        "case_id": "3DA0T2V6JJ2NLUAV6FWM",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/3DA0T2V6JJ2NLUAV6FWM/mri_norm2.h5"
+      },
+      {
+        "case_id": "MFTDVMBWFNQ3F5KHBRDR",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/MFTDVMBWFNQ3F5KHBRDR/mri_norm2.h5"
+      },
+      {
+        "case_id": "GSC9KNY0VEZXFSGWNF25",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/GSC9KNY0VEZXFSGWNF25/mri_norm2.h5"
+      },
+      {
+        "case_id": "0RZDK210BSMWAA6467LU",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/0RZDK210BSMWAA6467LU/mri_norm2.h5"
+      },
+      {
+        "case_id": "P1OTI3IWJUIB5NRLULLH",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/P1OTI3IWJUIB5NRLULLH/mri_norm2.h5"
+      },
+      {
+        "case_id": "5BHTH9RHH3PQT913I59W",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/5BHTH9RHH3PQT913I59W/mri_norm2.h5"
+      },
+      {
+        "case_id": "TDDI6L3Y0L9VVFP9MNFS",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/TDDI6L3Y0L9VVFP9MNFS/mri_norm2.h5"
+      },
+      {
+        "case_id": "Q7J0WYM695R9MA285ZW0",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/Q7J0WYM695R9MA285ZW0/mri_norm2.h5"
+      },
+      {
+        "case_id": "4498CA6DZWELOXCBRYRF",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/4498CA6DZWELOXCBRYRF/mri_norm2.h5"
+      },
+      {
+        "case_id": "IIY6TYJMTJIZRIZLB9YW",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/IIY6TYJMTJIZRIZLB9YW/mri_norm2.h5"
+      },
+      {
+        "case_id": "IJJY51YW3W4YJJ7DTVTK",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/IJJY51YW3W4YJJ7DTVTK/mri_norm2.h5"
+      },
+      {
+        "case_id": "Q0MEX9ZIKAGJORSPLQ3Y",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/Q0MEX9ZIKAGJORSPLQ3Y/mri_norm2.h5"
+      },
+      {
+        "case_id": "DQ5UYBGR5QP6L692QSG6",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/DQ5UYBGR5QP6L692QSG6/mri_norm2.h5"
+      },
+      {
+        "case_id": "EJ5V7SPR4961JWD6SS8V",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/EJ5V7SPR4961JWD6SS8V/mri_norm2.h5"
+      },
+      {
+        "case_id": "WW8F5CO4S4K5IM5Z7EXX",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/WW8F5CO4S4K5IM5Z7EXX/mri_norm2.h5"
+      },
+      {
+        "case_id": "RSZY41MT2FGDKHWWL5L2",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/RSZY41MT2FGDKHWWL5L2/mri_norm2.h5"
+      },
+      {
+        "case_id": "BZUFJX66T0W6ZPVTL9DU",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/BZUFJX66T0W6ZPVTL9DU/mri_norm2.h5"
+      },
+      {
+        "case_id": "A11O45O3NAXWM7T2H8CH",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/A11O45O3NAXWM7T2H8CH/mri_norm2.h5"
+      },
+      {
+        "case_id": "78NJ5YFQF72BGC8RO51C",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/78NJ5YFQF72BGC8RO51C/mri_norm2.h5"
+      },
+      {
+        "case_id": "A5RNNK0A891WUSC2V624",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/A5RNNK0A891WUSC2V624/mri_norm2.h5"
+      },
+      {
+        "case_id": "YDKD1HVHSME6NVMA8I39",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/YDKD1HVHSME6NVMA8I39/mri_norm2.h5"
+      },
+      {
+        "case_id": "UPT6DX9IQY9JAZ7HJKA7",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/UPT6DX9IQY9JAZ7HJKA7/mri_norm2.h5"
+      },
+      {
+        "case_id": "FGM5NIWN3URY4HF4WNUW",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/FGM5NIWN3URY4HF4WNUW/mri_norm2.h5"
+      },
+      {
+        "case_id": "V0MZOWJ6MU3RMRCV9EXR",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/V0MZOWJ6MU3RMRCV9EXR/mri_norm2.h5"
+      },
+      {
+        "case_id": "8ZG2TRZ81MAWHZPN9KKG",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/8ZG2TRZ81MAWHZPN9KKG/mri_norm2.h5"
+      },
+      {
+        "case_id": "VQ2L3WM8KEVF6L44E6G9",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/VQ2L3WM8KEVF6L44E6G9/mri_norm2.h5"
+      },
+      {
+        "case_id": "AT5CRO5JUDBWD4RUPXSQ",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/AT5CRO5JUDBWD4RUPXSQ/mri_norm2.h5"
+      },
+      {
+        "case_id": "3C2QTUNI0852XV7ZH4Q1",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/3C2QTUNI0852XV7ZH4Q1/mri_norm2.h5"
+      },
+      {
+        "case_id": "E2ZMO66WGS74UKXTZPPQ",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/E2ZMO66WGS74UKXTZPPQ/mri_norm2.h5"
+      },
+      {
+        "case_id": "JGFOLWJF7YCYD8DPHQNH",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/JGFOLWJF7YCYD8DPHQNH/mri_norm2.h5"
+      },
+      {
+        "case_id": "LH4FVU3TQDEC87YGN6FL",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/LH4FVU3TQDEC87YGN6FL/mri_norm2.h5"
+      },
+      {
+        "case_id": "QZC1W0FNR19KJFLOCFLH",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/QZC1W0FNR19KJFLOCFLH/mri_norm2.h5"
+      },
+      {
+        "case_id": "DLKXBV73A55ZTSZ0QQI2",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/DLKXBV73A55ZTSZ0QQI2/mri_norm2.h5"
+      },
+      {
+        "case_id": "ZIJLJAVQV3FJ6JSQOH1E",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/ZIJLJAVQV3FJ6JSQOH1E/mri_norm2.h5"
+      },
+      {
+        "case_id": "HZZ4O0BRKF8S0YX3NNF7",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/HZZ4O0BRKF8S0YX3NNF7/mri_norm2.h5"
+      },
+      {
+        "case_id": "VG4C826RAAKVMV9BQLVD",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/VG4C826RAAKVMV9BQLVD/mri_norm2.h5"
+      },
+      {
+        "case_id": "4CHFJGF6ZUM7CMZTNFQF",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/4CHFJGF6ZUM7CMZTNFQF/mri_norm2.h5"
+      },
+      {
+        "case_id": "BYSRSI3H4YTWKMM3MADP",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/BYSRSI3H4YTWKMM3MADP/mri_norm2.h5"
+      },
+      {
+        "case_id": "8GYK8A9MBRC9TV0FVSRA",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/8GYK8A9MBRC9TV0FVSRA/mri_norm2.h5"
+      },
+      {
+        "case_id": "CBIJFVZ5L9BS0LKWE8YL",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CBIJFVZ5L9BS0LKWE8YL/mri_norm2.h5"
+      },
+      {
+        "case_id": "CCGAKN4EDT72KC8TTJ76",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CCGAKN4EDT72KC8TTJ76/mri_norm2.h5"
+      },
+      {
+        "case_id": "5QFK2PMHNX7UALK52NNA",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/5QFK2PMHNX7UALK52NNA/mri_norm2.h5"
+      },
+      {
+        "case_id": "MJHV7F65TB2A76CQLOC3",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/MJHV7F65TB2A76CQLOC3/mri_norm2.h5"
+      },
+      {
+        "case_id": "KM5RYAMP4P4ZP6XWP3Q2",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/KM5RYAMP4P4ZP6XWP3Q2/mri_norm2.h5"
+      },
+      {
+        "case_id": "K32FD6LRSUSSXGS1YUOX",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/K32FD6LRSUSSXGS1YUOX/mri_norm2.h5"
+      },
+      {
+        "case_id": "38CWS74285MFGZZXR09Z",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/38CWS74285MFGZZXR09Z/mri_norm2.h5"
+      },
+      {
+        "case_id": "BNK95S2SJXEGSW7VAKYU",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/BNK95S2SJXEGSW7VAKYU/mri_norm2.h5"
+      },
+      {
+        "case_id": "ZQPMJ4XEC5A4BISD45P1",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/ZQPMJ4XEC5A4BISD45P1/mri_norm2.h5"
+      },
+      {
+        "case_id": "DYXSCIWHLSUOZIDDSZ40",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/DYXSCIWHLSUOZIDDSZ40/mri_norm2.h5"
+      },
+      {
+        "case_id": "1D7CUD1955YZPGK8XHJX",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/1D7CUD1955YZPGK8XHJX/mri_norm2.h5"
+      },
+      {
+        "case_id": "HVE7DR3CUA2IM3RC6OMA",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/HVE7DR3CUA2IM3RC6OMA/mri_norm2.h5"
+      },
+      {
+        "case_id": "5FKQL4K14KCB72Y8YMC2",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/5FKQL4K14KCB72Y8YMC2/mri_norm2.h5"
+      },
+      {
+        "case_id": "CB5P5W7X310NIIVU7UZV",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CB5P5W7X310NIIVU7UZV/mri_norm2.h5"
+      },
+      {
+        "case_id": "JEC6HJ7SQJXBKVREX03F",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/JEC6HJ7SQJXBKVREX03F/mri_norm2.h5"
+      },
+      {
+        "case_id": "O5TSIKRD4AIB8K84WIR9",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/O5TSIKRD4AIB8K84WIR9/mri_norm2.h5"
+      },
+      {
+        "case_id": "7FUCNXB39F78WTOP5K71",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/7FUCNXB39F78WTOP5K71/mri_norm2.h5"
+      },
+      {
+        "case_id": "KSNYHUBHHUJTYJ14UQZR",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/KSNYHUBHHUJTYJ14UQZR/mri_norm2.h5"
+      },
+      {
+        "case_id": "8M99G0JLAXG9GLPV0O8G",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/8M99G0JLAXG9GLPV0O8G/mri_norm2.h5"
+      },
+      {
+        "case_id": "23X6SY44VT9KFHR7S7OC",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/23X6SY44VT9KFHR7S7OC/mri_norm2.h5"
+      },
+      {
+        "case_id": "2XL5HSFSE93RMOJDRGR4",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/2XL5HSFSE93RMOJDRGR4/mri_norm2.h5"
+      },
+      {
+        "case_id": "MVKIPGBKTNSENNP1S4HB",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/MVKIPGBKTNSENNP1S4HB/mri_norm2.h5"
+      },
+      {
+        "case_id": "UZUZZT2W9IUSHL6ASOX3",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/UZUZZT2W9IUSHL6ASOX3/mri_norm2.h5"
+      },
+      {
+        "case_id": "5UB5KFD2PK38Z4LS6W80",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/5UB5KFD2PK38Z4LS6W80/mri_norm2.h5"
+      },
+      {
+        "case_id": "ULHWPWKKLTE921LQLH1P",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/ULHWPWKKLTE921LQLH1P/mri_norm2.h5"
+      },
+      {
+        "case_id": "CZPMV6KWZ4I7IJJP9FOK",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/CZPMV6KWZ4I7IJJP9FOK/mri_norm2.h5"
+      },
+      {
+        "case_id": "WNPKE0W404QE9AELX1LR",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/WNPKE0W404QE9AELX1LR/mri_norm2.h5"
+      },
+      {
+        "case_id": "6799D6LEBH3NSRV1KH27",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/6799D6LEBH3NSRV1KH27/mri_norm2.h5"
+      }
+    ],
+    "val": [
+      {
+        "case_id": "06SR5RBREL16DQ6M8LWS",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/06SR5RBREL16DQ6M8LWS/mri_norm2.h5"
+      },
+      {
+        "case_id": "Y7ZU0B2APPF54WG6PDMF",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/Y7ZU0B2APPF54WG6PDMF/mri_norm2.h5"
+      },
+      {
+        "case_id": "IQYKPTWXVV9H0IHB8YXC",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/IQYKPTWXVV9H0IHB8YXC/mri_norm2.h5"
+      },
+      {
+        "case_id": "X18LU5AOBNNDMLTA0JZL",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/X18LU5AOBNNDMLTA0JZL/mri_norm2.h5"
+      },
+      {
+        "case_id": "I2VZ7N8H9QYNYT7ZZF1Y",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/I2VZ7N8H9QYNYT7ZZF1Y/mri_norm2.h5"
+      },
+      {
+        "case_id": "WMDG2EFA6L2SNDZXIRU0",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/WMDG2EFA6L2SNDZXIRU0/mri_norm2.h5"
+      },
+      {
+        "case_id": "8RE90C8H5DKF4V6HO8UU",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/8RE90C8H5DKF4V6HO8UU/mri_norm2.h5"
+      },
+      {
+        "case_id": "PVNXUK681N9BY14K4Z86",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/PVNXUK681N9BY14K4Z86/mri_norm2.h5"
+      },
+      {
+        "case_id": "VDOF02M8ZHEAADFMS6NP",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/VDOF02M8ZHEAADFMS6NP/mri_norm2.h5"
+      },
+      {
+        "case_id": "SN4LF8SGBSRQUPTDSX78",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/SN4LF8SGBSRQUPTDSX78/mri_norm2.h5"
+      },
+      {
+        "case_id": "LJSDNMND9SHKM7Q4IRHJ",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/LJSDNMND9SHKM7Q4IRHJ/mri_norm2.h5"
+      },
+      {
+        "case_id": "9DQYTIU00I4JC0OEOKQQ",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/9DQYTIU00I4JC0OEOKQQ/mri_norm2.h5"
+      },
+      {
+        "case_id": "9DCM2IB45SK6YKQNYUQY",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/9DCM2IB45SK6YKQNYUQY/mri_norm2.h5"
+      },
+      {
+        "case_id": "WBG9WYZ1B25WDT5WAT8T",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/WBG9WYZ1B25WDT5WAT8T/mri_norm2.h5"
+      },
+      {
+        "case_id": "Z9GMG63CJLL0VW893BB1",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/Z9GMG63CJLL0VW893BB1/mri_norm2.h5"
+      }
+    ],
+    "test": [
+      {
+        "case_id": "1MHBF3G6DCPWHSKG7XCP",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/1MHBF3G6DCPWHSKG7XCP/mri_norm2.h5"
+      },
+      {
+        "case_id": "IDWWHGWJ5STOQXSDT6GU",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/IDWWHGWJ5STOQXSDT6GU/mri_norm2.h5"
+      },
+      {
+        "case_id": "R8ER97O9UUN77C02VE2J",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/R8ER97O9UUN77C02VE2J/mri_norm2.h5"
+      },
+      {
+        "case_id": "45C45I6IXAFGNRO067W9",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/45C45I6IXAFGNRO067W9/mri_norm2.h5"
+      },
+      {
+        "case_id": "OIRDLE32TXZX942FVZMM",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/OIRDLE32TXZX942FVZMM/mri_norm2.h5"
+      },
+      {
+        "case_id": "VIXBEFTNVHZWKAKURJBN",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/VIXBEFTNVHZWKAKURJBN/mri_norm2.h5"
+      },
+      {
+        "case_id": "4EPVTT1HPA8U60CDUKXE",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/4EPVTT1HPA8U60CDUKXE/mri_norm2.h5"
+      },
+      {
+        "case_id": "5HH0WPWIY06DLAFOBQ4M",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/5HH0WPWIY06DLAFOBQ4M/mri_norm2.h5"
+      },
+      {
+        "case_id": "9DHWWP5Y66VDMPXISZ13",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/9DHWWP5Y66VDMPXISZ13/mri_norm2.h5"
+      },
+      {
+        "case_id": "A4R1S23KR0KU2WSYHK2X",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/A4R1S23KR0KU2WSYHK2X/mri_norm2.h5"
+      },
+      {
+        "case_id": "BXJWOUYP2J3EN4U92517",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/BXJWOUYP2J3EN4U92517/mri_norm2.h5"
+      },
+      {
+        "case_id": "XYDLYJ5CS19FDBVLJIPI",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/XYDLYJ5CS19FDBVLJIPI/mri_norm2.h5"
+      },
+      {
+        "case_id": "1GU15S0GJ6PFNARO469W",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/1GU15S0GJ6PFNARO469W/mri_norm2.h5"
+      },
+      {
+        "case_id": "57SGAJMLCTCH92QUA0EE",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/57SGAJMLCTCH92QUA0EE/mri_norm2.h5"
+      },
+      {
+        "case_id": "UTBUJIWZMKP64E3N73YC",
+        "h5_path": "/content/UA-MT/data/2018LA_Seg_Training Set/UTBUJIWZMKP64E3N73YC/mri_norm2.h5"
+      }
+    ]
+  }
+}
