@@ -12,3 +12,4 @@ outputs/
 *.ckpt
 .ipynb_checkpoints/
 .env
+_smoke_runs/
