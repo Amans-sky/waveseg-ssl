@@ -117,6 +117,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     p.add_argument("--evaluate-test", action="store_true", help="Evaluate best.pt on the locked test split")
     p.add_argument("--confirm-frozen", action="store_true", help="Required with --evaluate-test")
     p.add_argument("--smoke", action="store_true", help="CPU smoke test on synthetic volumes")
+    p.add_argument("--allow-cpu", action="store_true", help="Train even without a GPU (~20x slower)")
     args = p.parse_args(argv)
     if not args.smoke and not args.exp_name:
         p.error("--exp-name is required (except with --smoke)")
@@ -839,6 +840,10 @@ def main(argv=None):
         return
 
     # ---------------- Training ----------------
+    if dev.type == "cpu" and not (args.smoke or args.allow_cpu):
+        raise SystemExit("No GPU detected - training on CPU takes ~13 min/epoch (~22 h per run). "
+                         "In Colab: Runtime > Change runtime type > GPU, then rerun with --resume. "
+                         "Pass --allow-cpu to train on CPU anyway.")
     loader_kw = dict(batch_size=1, shuffle=True, num_workers=args.num_workers, pin_memory=dev.type == "cuda",
                      worker_init_fn=worker_init_fn if args.num_workers > 0 else None,
                      persistent_workers=args.num_workers > 0)
