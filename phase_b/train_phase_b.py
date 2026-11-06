@@ -860,7 +860,9 @@ def main(argv=None):
         load_model_state(model, ck)
         for k, o in opts.items():
             o.load_state_dict(ck["optimizer_states"][k])
-        scaler.load_state_dict(ck["scaler_state"])
+        # Empty when latest.pt was written on CPU (AMP disabled); the GPU scaler then starts fresh.
+        if ck["scaler_state"] and use_amp:
+            scaler.load_state_dict(ck["scaler_state"])
         history, best_val, best_epoch = ck["history"], ck["best_val"], ck["best_epoch"]
         start_epoch = ck["epoch"] + 1
         print(f"Resumed from epoch {ck['epoch']} (best val {best_val:.6f} @ {best_epoch})")
